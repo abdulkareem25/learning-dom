@@ -11,23 +11,33 @@
 
 // Build a counter that increases/decreases with button clicks
 
-let count = 0;
-const counter = document.querySelector('.counter');
+// let count = 0;
+// const counter = document.querySelector('.counter');
 
-const up = document.querySelector('.up');
-const down = document.querySelector('.down');
-const reset = document.querySelector('.reset');
-const renderCount = () => {counter.textContent = count;};
+// const up = document.querySelector('.up');
+// const down = document.querySelector('.down');
+// const reset = document.querySelector('.reset');
+// const renderCount = () => {counter.textContent = count;};
 
-up.addEventListener('click', () => {
-    count++; 
-    renderCount();
-})
-down.addEventListener('click', () => {
-    count--;
-    renderCount();
-})
-reset.addEventListener('click', () => {
-    count = 0;
-    renderCount();
+// up.addEventListener('click', () => {
+//     count++; 
+//     renderCount();
+// })
+// down.addEventListener('click', () => {
+//     count--;
+//     renderCount();
+// })
+// reset.addEventListener('click', () => {
+//     count = 0;
+//     renderCount();
+// })
+
+// Make an image that hides/shows when button is clicked
+
+let image = document.querySelector('img');
+let btn = document.querySelector('button');
+
+btn.addEventListener('click', () => {
+    image.className = image.classList.contains('hidden') ? 'image' : 'image hidden';
+    btn.innerText = image.classList.contains('hidden') ? 'Show Image' : 'Hide Image';
 })
