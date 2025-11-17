@@ -34,10 +34,19 @@
 
 // Make an image that hides/shows when button is clicked
 
-let image = document.querySelector('img');
-let btn = document.querySelector('button');
+// let image = document.querySelector('img');
+// let btn = document.querySelector('button');
 
-btn.addEventListener('click', () => {
-    image.className = image.classList.contains('hidden') ? 'image' : 'image hidden';
-    btn.innerText = image.classList.contains('hidden') ? 'Show Image' : 'Hide Image';
+// btn.addEventListener('click', () => {
+//     image.className = image.classList.contains('hidden') ? 'image' : 'image hidden';
+//     btn.innerText = image.classList.contains('hidden') ? 'Show Image' : 'Hide Image';
+// })
+
+// Create an input that shows typed text in real-time below it
+
+let input = document.querySelector('input');
+let display = document.querySelector('.text-display');
+
+input.addEventListener('input', () => {
+    display.textContent = input.value;
 })
