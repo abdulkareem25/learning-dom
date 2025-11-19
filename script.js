@@ -130,29 +130,73 @@
 
 // Create a form that validates email and password
 
-const formEl = document.querySelector('form');
-const emailEl = document.querySelector('#email')
-const passwordEl = document.querySelector('#password')
-const submitBtn = document.querySelector('button');
+// const formEl = document.querySelector('form');
+// const emailEl = document.querySelector('#email')
+// const passwordEl = document.querySelector('#password')
+// const submitBtn = document.querySelector('button');
 
-const validateForm = (e) => {
-    e.preventDefault()
-    const email = emailEl.value.trim()
-    const password = passwordEl.value
+// const validateForm = (e) => {
+//     e.preventDefault()
+//     const email = emailEl.value.trim()
+//     const password = passwordEl.value
 
-    if(!email || !password) {
-        console.error("All fields are required.");
-        return
-    }
+//     if(!email || !password) {
+//         console.error("All fields are required.");
+//         return
+//     }
 
-    if(password.length < 8) {
-        console.error("password length must be 8 characters long");
-        return
-    }
+//     if(password.length < 8) {
+//         console.error("password length must be 8 characters long");
+//         return
+//     }
 
-    emailEl.value = "";
-    passwordEl.value = "";
-    console.log("authentication sucessful!")
+//     emailEl.value = "";
+//     passwordEl.value = "";
+//     console.log("authentication sucessful!")
+// }
+
+// formEl.addEventListener('submit', validateForm)
+
+// Make a image gallery with next/previous buttons
+
+const nextBtn = document.querySelector('.next-btn');
+const prevBtn = document.querySelector('.prev-btn');
+const galleryEl = document.querySelector('.gallery-img');
+const totalImgsEl = document.querySelector('.total-imgs');
+const currentImgEl = document.querySelector('.current-img');
+
+const natureImages = [
+    "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
+    "https://images.unsplash.com/photo-1503264116251-35a269479413",
+    "https://images.unsplash.com/photo-1437623889155-075d40e2e59f",
+    "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66" 
+];
+
+let currentImg = 1;
+
+const setImage = (currentImg) => {
+    galleryEl.setAttribute('src', `${natureImages[currentImg - 1]}`)
+    currentImgEl.textContent = currentImg;
+    totalImgsEl.textContent = natureImages.length;
 }
 
-formEl.addEventListener('submit', validateForm)
+setImage(currentImg);
+
+nextBtn.addEventListener('click', () => {
+    currentImg++;
+    if (currentImg === natureImages.length + 1) {
+        currentImg = 0;
+    }
+    setImage(currentImg);
+});
+
+prevBtn.addEventListener('click', () => {
+    currentImg--;
+    if (currentImg === 0) {
+        currentImg = natureImages.length;
+    }
+    setImage(currentImg);
+});

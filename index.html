@@ -11,14 +11,17 @@
 <body>
 
     <div class="container">
-        <form>
-            <input type="email" placeholder="Email" id="email" />
-            <input type="password" placeholder="Password" id="password" />
-            <button type="submit">Login</button>
-        </form>
+        <div class="gallery">
+            <button class="prev-btn">❮ Prev</button>
+            <div class="gallery-frame">
+                <img alt="Gallery Image" class="gallery-img">
+            </div>
+            <button class="next-btn">Next ❯</button>
+        </div>
+        <p class="image-counter"><span class="current-img"></span> / <span class="total-imgs"></span></p>
     </div>
 
-        <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
