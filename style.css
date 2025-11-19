@@ -22,110 +22,29 @@ body {
     gap: 20px;
 }
 
-#textInput {
-    width: 300px;
-    height: 40px;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #444;
-    border-radius: 5px;
-    background-color: #2d2d2d;
-    color: #e0e0e0;
-}
-
-#textInput::placeholder {
-    color: #888;
-}
-
-.add-btn {
-    padding: 10px 20px;
-    font-size: 25px;
-    font-weight: bold;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.add-btn:hover {
-    background-color: #218838;
-}
-
-.tasks {
-    width: 300px;
-    max-height: 400px;
-    overflow-y: auto;
-    border: 1px solid #444;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #2d2d2d;
-    scrollbar-width: none;
-}
-
-#notasks {
-    text-align: center;
-    color: #888;
-    font-size: 16px;
-}
-
-.task {
+form {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input {
     padding: 10px;
-    border-bottom: 1px solid #444;
-}
-
-.task:last-child {
-    border-bottom: none;
-}
-
-.task-text {
+    border: none;
+    border-radius: 5px;
     font-size: 16px;
-    color: #e0e0e0;
 }
 
-.task-text.completed {
-    text-decoration: line-through;
-    color: #888;
-}
-
-.task-btns {
-    display: flex;
-    gap: 10px;
-}
-
-.delete-btn {
-    padding: 5px 10px;
-    font-size: 14px;
-    font-weight: bolder;
-    background-color: #dc3545;
-    color: white;
+button {
+    padding: 10px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.delete-btn:hover {
-    background-color: #c82333;
-}
-
-.done-btn {
-    padding: 5px 10px;
-    font-size: 14px;
-    font-weight: bolder;
-    background-color: gray;
+    background-color: #4caf50;
     color: white;
-    border: none;
-    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    margin-right: 10px;
-    transition: background-color 0.3s;
 }
 
-.done-btn:hover {
-    background-color: #696969;
+button:hover {
+    background-color: #45a049;
 }
