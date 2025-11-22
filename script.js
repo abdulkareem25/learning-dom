@@ -159,44 +159,153 @@
 
 // Make a image gallery with next/previous buttons
 
-const nextBtn = document.querySelector('.next-btn');
-const prevBtn = document.querySelector('.prev-btn');
-const galleryEl = document.querySelector('.gallery-img');
-const totalImgsEl = document.querySelector('.total-imgs');
-const currentImgEl = document.querySelector('.current-img');
+// const nextBtn = document.querySelector('.next-btn');
+// const prevBtn = document.querySelector('.prev-btn');
+// const galleryEl = document.querySelector('.gallery-img');
+// const totalImgsEl = document.querySelector('.total-imgs');
+// const currentImgEl = document.querySelector('.current-img');
 
-const natureImages = [
-    "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
-    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
-    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
-    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
-    "https://images.unsplash.com/photo-1503264116251-35a269479413",
-    "https://images.unsplash.com/photo-1437623889155-075d40e2e59f",
-    "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66" 
-];
+// const natureImages = [
+//     "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+//     "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+//     "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
+//     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
+//     "https://images.unsplash.com/photo-1503264116251-35a269479413",
+//     "https://images.unsplash.com/photo-1437623889155-075d40e2e59f",
+//     "https://images.unsplash.com/photo-1482192596544-9eb780fc7f66" 
+// ];
 
-let currentImg = 1;
+// let currentImg = 1;
 
-const setImage = (currentImg) => {
-    galleryEl.setAttribute('src', `${natureImages[currentImg - 1]}`)
-    currentImgEl.textContent = currentImg;
-    totalImgsEl.textContent = natureImages.length;
+// const setImage = (currentImg) => {
+//     galleryEl.setAttribute('src', `${natureImages[currentImg - 1]}`)
+//     currentImgEl.textContent = currentImg;
+//     totalImgsEl.textContent = natureImages.length;
+// }
+
+// setImage(currentImg);
+
+// nextBtn.addEventListener('click', () => {
+//     currentImg++;
+//     if (currentImg === natureImages.length + 1) {
+//         currentImg = 0;
+//     }
+//     setImage(currentImg);
+// });
+
+// prevBtn.addEventListener('click', () => {
+//     currentImg--;
+//     if (currentImg === 0) {
+//         currentImg = natureImages.length;
+//     }
+//     setImage(currentImg);
+// });
+
+// Build a simple calculator with basic operations
+
+const display = document.querySelector('.display');
+const buttons = document.querySelectorAll('.btn');
+const clearBtn = document.querySelector('.btn.clear');
+const backspaceBtn = document.querySelector('.btn.backspace');
+const equalsBtn = document.querySelector('.btn.equals');
+const operatorBtns = document.querySelectorAll('.btn.operator:not(.equals)');
+const decimalBtn = document.querySelector('.btn.decimal');
+
+let displayValue = '0';
+let previousValue = '';
+let operation = null;
+let shouldResetDisplay = false;
+
+const updateDisplay = () => {
+    display.value = displayValue;
+};
+
+const handleNumberClick = (num) => {
+    if (shouldResetDisplay) {
+        displayValue = num;
+        shouldResetDisplay = false;
+    } else {
+        displayValue = displayValue === '0' ? num : displayValue + num;
+    };
+    updateDisplay();
+};
+
+const handleOperation = (op) => {
+
+    if (operation !== null && !shouldResetDisplay) {
+        calculate();
+    }
+
+    previousValue = displayValue;
+    operation = op;
+    shouldResetDisplay = true;
 }
 
-setImage(currentImg);
+const calculate = () => {
 
-nextBtn.addEventListener('click', () => {
-    currentImg++;
-    if (currentImg === natureImages.length + 1) {
-        currentImg = 0;
-    }
-    setImage(currentImg);
+    if (operation === null || shouldResetDisplay) return;
+
+    const prev = parseFloat(previousValue);
+    const current = parseFloat(displayValue);
+    let result;
+
+    switch (operation) {
+        case '+': result = prev + current; break;
+        case '-': result = prev - current; break;
+        case '*': result = prev * current; break;
+        case '/': result = prev / current; break;
+        default: return;
+    };
+
+    displayValue = result.toString();
+    operation = null;
+    shouldResetDisplay = true;
+    updateDisplay();
+};
+
+const handleDecimal = () => {
+    if (displayValue === '0') {
+        displayValue = '0.';
+        shouldResetDisplay = false;
+    } else if (!displayValue.includes('.')) {
+        displayValue += '.';
+    };
+    updateDisplay();
+};
+
+const handleClear = () => {
+    displayValue = '0';
+    previousValue = '';
+    operation = null;
+    shouldResetDisplay = false;
+    updateDisplay();
+};
+
+const handleBackspace = () => {
+    if (displayValue.length > 1) {
+        displayValue = displayValue.slice(0, -1);
+    } else {
+        displayValue = '0';
+    };
+    updateDisplay();
+};
+
+buttons.forEach(btn => {
+    if (!btn.classList.contains('clear') &&
+        !btn.classList.contains('backspace') &&
+        !btn.classList.contains('equals') &&
+        !btn.classList.contains('operator') &&
+        !btn.classList.contains('decimal')) {
+        btn.addEventListener('click', () => handleNumberClick(btn.textContent));
+    };
 });
 
-prevBtn.addEventListener('click', () => {
-    currentImg--;
-    if (currentImg === 0) {
-        currentImg = natureImages.length;
-    }
-    setImage(currentImg);
+operatorBtns.forEach(btn => {
+    btn.addEventListener('click', () => handleOperation(btn.textContent));
 });
+
+equalsBtn.addEventListener('click', calculate);
+clearBtn.addEventListener('click', handleClear);
+backspaceBtn.addEventListener('click', handleBackspace);
+decimalBtn.addEventListener('click', handleDecimal);
+updateDisplay();
