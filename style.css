@@ -1,122 +1,295 @@
+:root {
+    --bg: #0f1724;
+    --card: #0b1220;
+    --muted: #94a3b8;
+    --accent: #60a5fa;
+    --glass: rgba(255, 255, 255, 0.03);
+    --success: #34d399;
+    --danger: #fb7185;
+    --radius: 12px;
+    --gap: 16px;
+    --max-width: 1100px;
+    --focus: 3px;
+}
+
+/* Reset-ish */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 html,
-body {
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(135deg, #0f0f0f 0%, #1e1e1e 100%);
-    color: #e0e0e0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+body,
+#app {
+    height: 100%
 }
 
-.container {
-    height: 100vh;
-    width: 100vw;
+body {
+    margin: 0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg, #071027 0%, #061022 100%);
+    color: #e6eef8;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+/* App container */
+.app {
+    width: 100%;
+    max-width: var(--max-width);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.03));
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 20px;
 }
 
-.calculator {
-    background: linear-gradient(180deg, #2d2d2d 0%, #252525 100%);
-    border-radius: 20px;
-    padding: 24px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    width: 360px;
+/* Header */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.display {
-    width: 100%;
-    padding: 20px;
-    font-size: 32px;
-    font-weight: 300;
-    background-color: #1a1a1a;
-    color: #00ff00;
-    border: none;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    text-align: right;
-    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.4);
-    letter-spacing: 0.5px;
+.app-header h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
 }
 
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.controls {
+    display: flex;
+    align-items: center;
     gap: 12px;
 }
 
-.btn {
-    padding: 22px;
-    font-size: 18px;
-    font-weight: 500;
+/* Search */
+.search-wrap {
+    display: block
+}
+
+.search {
+    min-width: 220px;
+    padding: 10px 12px;
+    border-radius: 10px;
     border: none;
-    border-radius: 12px;
-    background-color: #3a3a3a;
-    color: #e0e0e0;
+    background: var(--glass);
+    color: inherit;
+    outline: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.search:focus {
+    box-shadow: 0 0 0 var(--focus) rgba(96, 165, 250, 0.12);
+}
+
+.btn {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 8px 10px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 0.9rem;
+    transition: all .15s ease;
 }
 
 .btn:hover {
-    background-color: #4a4a4a;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-2px)
 }
 
-.btn:active {
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+.btn.primary {
+    background: linear-gradient(90deg, #2563eb33, rgba(96, 165, 250, 0.08));
+    color: var(--accent);
+    border-color: rgba(96, 165, 250, 0.12);
 }
 
-.btn.operator {
-    background: linear-gradient(180deg, #ff9500 0%, #ff7200 100%);
-    color: #fff;
+.composer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    padding: 16px;
+    border-radius: var(--radius);
+    border: 1px solid rgba(255, 255, 255, 0.02);
 }
 
-.btn.operator:hover {
-    background: linear-gradient(180deg, #ffb143 0%, #ff9500 100%);
+.note-title {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.02);
+    color: inherit;
+    font-weight: 600;
+    outline: none;
 }
 
-.btn.clear {
-    background: linear-gradient(180deg, #ff3b30 0%, #d63229 100%);
-    color: #fff;
+.note-body {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    resize: vertical;
+    background: rgba(255, 255, 255, 0.01);
+    color: inherit;
+    min-height: 4.5rem;
+    outline: none;
 }
 
-.btn.clear:hover {
-    background: linear-gradient(180deg, #ff6b63 0%, #ff3b30 100%);
+.note-title:focus,
+.note-body:focus {
+    box-shadow: 0 0 0 var(--focus) rgba(96, 165, 250, 0.12);
 }
 
-.btn.backspace {
-    background: linear-gradient(180deg, #ff3b30 0%, #d63229 100%);
-    color: #fff;
+/* Composer actions */
+.composer-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
 }
 
-.btn.backspace:hover {
-    background: linear-gradient(180deg, #ff6b63 0%, #ff3b30 100%);
+.action-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
 }
 
-.btn.equals {
-    background: linear-gradient(180deg, #34c759 0%, #29a745 100%);
-    color: #fff;
-    grid-row: span 2;
+/* Notes section */
+.notes-section {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.btn.equals:hover {
-    background: linear-gradient(180deg, #5dde7f 0%, #34c759 100%);
+.notes-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 0.95rem;
 }
 
-.btn.zero {
-    grid-column: span 2;
+.notes-list {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: var(--gap);
+    overflow-y: auto;
+    height: 30vh;
+    scrollbar-width: thick;
+    scrollbar-color: var(--accent) transparent;
 }
 
-.btn.decimal {
-    background-color: #3a3a3a;
+/* Note card */
+.note-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(0, 0, 0, 0.02));
+    border-radius: 14px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.note-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(2, 6, 23, 0.45);
+}
+
+.note-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.note-title-text {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    word-break: break-word;
+}
+
+.note-actions {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+}
+
+.icon-btn:hover {
+    color: white;
+    transform: translateY(-2px)
+}
+
+/* note body */
+.note-body-text {
+    color: var(--muted);
+    background-color: var(--glass);
+    border-radius: 14px;
+    padding: 7px;
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+    overflow-y: auto;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    scrollbar-width: thin;
+}
+
+.notes-list.is-empty::after {
+    content: "No notes yet - write one above.";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 1/-1;
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    min-height: 150px;
+}
+
+/* small screens */
+@media (max-width:700px) {
+    body {
+        padding: 18px
+    }
+
+    .app {
+        padding: 16px
+    }
+
+    .notes-list {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .search {
+        min-width: 120px
+    }
 }

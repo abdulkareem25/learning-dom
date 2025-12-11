@@ -1,6 +1,6 @@
 // Beginner Level
 
-// Create a button that changes the page background color when clicked
+// 1) Create a button that changes the page background color when clicked
 
 // const button = document.querySelector('button')
 // const num = () => (Math.floor(Math.random() * 256));
@@ -9,7 +9,7 @@
 //     document.body.style.backgroundColor = `rgb(${num()}, ${num()}, ${num()})`;
 // })
 
-// Build a counter that increases/decreases with button clicks
+// 2) Build a counter that increases/decreases with button clicks
 
 // let count = 0;
 // const counter = document.querySelector('.counter');
@@ -32,7 +32,7 @@
 //     renderCount();
 // })
 
-// Make an image that hides/shows when button is clicked
+// 3) Make an image that hides/shows when button is clicked
 
 // let image = document.querySelector('img');
 // let btn = document.querySelector('button');
@@ -42,7 +42,7 @@
 //     btn.innerText = image.classList.contains('hidden') ? 'Show Image' : 'Hide Image';
 // })
 
-// Create an input that shows typed text in real-time below it
+// 4) Create an input that shows typed text in real-time below it
 
 // let input = document.querySelector('input');
 // let display = document.querySelector('.text-display');
@@ -54,7 +54,7 @@
 
 // Intermediate Level
 
-// Build a todo list that adds/removes items
+// 5) Build a todo list that adds/removes items
 
 // const tasks = document.querySelector('.tasks');
 // const textInput = document.querySelector('#textInput');
@@ -128,7 +128,7 @@
 //     }
 // })
 
-// Create a form that validates email and password
+// 6) Create a form that validates email and password
 
 // const formEl = document.querySelector('form');
 // const emailEl = document.querySelector('#email')
@@ -157,7 +157,7 @@
 
 // formEl.addEventListener('submit', validateForm)
 
-// Make a image gallery with next/previous buttons
+// 7) Make a image gallery with next/previous buttons
 
 // const nextBtn = document.querySelector('.next-btn');
 // const prevBtn = document.querySelector('.prev-btn');
@@ -201,111 +201,136 @@
 //     setImage(currentImg);
 // });
 
-// Build a simple calculator with basic operations
+// 8) Build a simple calculator with basic operations
 
-const display = document.querySelector('.display');
-const buttons = document.querySelectorAll('.btn');
-const clearBtn = document.querySelector('.btn.clear');
-const backspaceBtn = document.querySelector('.btn.backspace');
-const equalsBtn = document.querySelector('.btn.equals');
-const operatorBtns = document.querySelectorAll('.btn.operator:not(.equals)');
-const decimalBtn = document.querySelector('.btn.decimal');
+// const display = document.querySelector('.display');
+// const buttons = document.querySelectorAll('.btn');
+// const clearBtn = document.querySelector('.btn.clear');
+// const backspaceBtn = document.querySelector('.btn.backspace');
+// const equalsBtn = document.querySelector('.btn.equals');
+// const operatorBtns = document.querySelectorAll('.btn.operator:not(.equals)');
+// const decimalBtn = document.querySelector('.btn.decimal');
 
-let displayValue = '0';
-let previousValue = '';
-let operation = null;
-let shouldResetDisplay = false;
+// let displayValue = '0';
+// let previousValue = '';
+// let operation = null;
+// let shouldResetDisplay = false;
 
-const updateDisplay = () => {
-    display.value = displayValue;
-};
+// const updateDisplay = () => {
+//     display.value = displayValue;
+// };
 
-const handleNumberClick = (num) => {
-    if (shouldResetDisplay) {
-        displayValue = num;
-        shouldResetDisplay = false;
-    } else {
-        displayValue = displayValue === '0' ? num : displayValue + num;
-    };
-    updateDisplay();
-};
+// const handleNumberClick = (num) => {
+//     if (shouldResetDisplay) {
+//         displayValue = num;
+//         shouldResetDisplay = false;
+//     } else {
+//         displayValue = displayValue === '0' ? num : displayValue + num;
+//     };
+//     updateDisplay();
+// };
 
-const handleOperation = (op) => {
+// const handleOperation = (op) => {
 
-    if (operation !== null && !shouldResetDisplay) {
-        calculate();
-    }
+//     if (operation !== null && !shouldResetDisplay) {
+//         calculate();
+//     }
 
-    previousValue = displayValue;
-    operation = op;
-    shouldResetDisplay = true;
+//     previousValue = displayValue;
+//     operation = op;
+//     shouldResetDisplay = true;
+// }
+
+// const calculate = () => {
+
+//     if (operation === null || shouldResetDisplay) return;
+
+//     const prev = parseFloat(previousValue);
+//     const current = parseFloat(displayValue);
+//     let result;
+
+//     switch (operation) {
+//         case '+': result = prev + current; break;
+//         case '-': result = prev - current; break;
+//         case '*': result = prev * current; break;
+//         case '/': result = prev / current; break;
+//         default: return;
+//     };
+
+//     displayValue = result.toString();
+//     operation = null;
+//     shouldResetDisplay = true;
+//     updateDisplay();
+// };
+
+// const handleDecimal = () => {
+//     if (displayValue === '0') {
+//         displayValue = '0.';
+//         shouldResetDisplay = false;
+//     } else if (!displayValue.includes('.')) {
+//         displayValue += '.';
+//     };
+//     updateDisplay();
+// };
+
+// const handleClear = () => {
+//     displayValue = '0';
+//     previousValue = '';
+//     operation = null;
+//     shouldResetDisplay = false;
+//     updateDisplay();
+// };
+
+// const handleBackspace = () => {
+//     if (displayValue.length > 1) {
+//         displayValue = displayValue.slice(0, -1);
+//     } else {
+//         displayValue = '0';
+//     };
+//     updateDisplay();
+// };
+
+// buttons.forEach(btn => {
+//     if (!btn.classList.contains('clear') &&
+//         !btn.classList.contains('backspace') &&
+//         !btn.classList.contains('equals') &&
+//         !btn.classList.contains('operator') &&
+//         !btn.classList.contains('decimal')) {
+//         btn.addEventListener('click', () => handleNumberClick(btn.textContent));
+//     };
+// });
+
+// operatorBtns.forEach(btn => {
+//     btn.addEventListener('click', () => handleOperation(btn.textContent));
+// });
+
+// equalsBtn.addEventListener('click', calculate);
+// clearBtn.addEventListener('click', handleClear);
+// backspaceBtn.addEventListener('click', handleBackspace);
+// decimalBtn.addEventListener('click', handleDecimal);
+// updateDisplay();
+
+
+// Advanced Level
+
+// 9) Create a notes app that saves to localStorage
+
+const notesListEl = document.getElementById('notes-list');
+const notesCountEl = document.getElementById('notes-count');
+const notesCount = notesListEl.childElementCount;
+
+function updateCount() {
+    notesCountEl.innerText = notesCount === 1 ? "1 note" : `${notesCount} notes`;
 }
+updateCount();
 
-const calculate = () => {
+function updateEmptyState() {
+    notesListEl.classList.toggle('is-empty', notesListEl.childElementCount === 0)
+}
+updateEmptyState()
 
-    if (operation === null || shouldResetDisplay) return;
+// 10) Build a dynamic table that allows adding/editing/deleting rows
 
-    const prev = parseFloat(previousValue);
-    const current = parseFloat(displayValue);
-    let result;
+// 11) Make a search-able contact list
 
-    switch (operation) {
-        case '+': result = prev + current; break;
-        case '-': result = prev - current; break;
-        case '*': result = prev * current; break;
-        case '/': result = prev / current; break;
-        default: return;
-    };
-
-    displayValue = result.toString();
-    operation = null;
-    shouldResetDisplay = true;
-    updateDisplay();
-};
-
-const handleDecimal = () => {
-    if (displayValue === '0') {
-        displayValue = '0.';
-        shouldResetDisplay = false;
-    } else if (!displayValue.includes('.')) {
-        displayValue += '.';
-    };
-    updateDisplay();
-};
-
-const handleClear = () => {
-    displayValue = '0';
-    previousValue = '';
-    operation = null;
-    shouldResetDisplay = false;
-    updateDisplay();
-};
-
-const handleBackspace = () => {
-    if (displayValue.length > 1) {
-        displayValue = displayValue.slice(0, -1);
-    } else {
-        displayValue = '0';
-    };
-    updateDisplay();
-};
-
-buttons.forEach(btn => {
-    if (!btn.classList.contains('clear') &&
-        !btn.classList.contains('backspace') &&
-        !btn.classList.contains('equals') &&
-        !btn.classList.contains('operator') &&
-        !btn.classList.contains('decimal')) {
-        btn.addEventListener('click', () => handleNumberClick(btn.textContent));
-    };
-});
-
-operatorBtns.forEach(btn => {
-    btn.addEventListener('click', () => handleOperation(btn.textContent));
-});
-
-equalsBtn.addEventListener('click', calculate);
-clearBtn.addEventListener('click', handleClear);
-backspaceBtn.addEventListener('click', handleBackspace);
-decimalBtn.addEventListener('click', handleDecimal);
-updateDisplay();
+// 12) Create a theme switcher that persists user preference
