@@ -317,20 +317,104 @@
 
 const notesListEl = document.getElementById('notes-list');
 const notesCountEl = document.getElementById('notes-count');
-const notesCount = notesListEl.childElementCount;
+const input = document.getElementById('note-title');
+const textarea = document.getElementById('note-body');
+const addBtn = document.getElementById('add-note');
+const clearBtn = document.getElementById('clear-composer');
+
+let notes = JSON.parse(localStorage.getItem('notes')) || [];
 
 function updateCount() {
+    const notesCount = notesListEl.childElementCount;
     notesCountEl.innerText = notesCount === 1 ? "1 note" : `${notesCount} notes`;
 }
-updateCount();
 
 function updateEmptyState() {
     notesListEl.classList.toggle('is-empty', notesListEl.childElementCount === 0)
 }
 updateEmptyState()
 
-// 10) Build a dynamic table that allows adding/editing/deleting rows
+function renderNotes(notes) {
 
-// 11) Make a search-able contact list
+    notesListEl.innerHTML = "";
 
-// 12) Create a theme switcher that persists user preference
+    const frag = document.createDocumentFragment();
+    notes.map((data, id) => {
+        const listEl = document.createElement('li');
+        listEl.classList.add('note-card');
+        listEl.dataset.index = id;
+
+        const headerEl = document.createElement('header');
+        headerEl.classList.add('note-head');
+
+        const titleEl = document.createElement('h3');
+        titleEl.classList.add('note-title-text');
+        titleEl.innerText = data.title || "";
+
+        const btns = document.createElement('div');
+        const delBtn = document.createElement('button');
+        delBtn.classList.add('icon-btn');
+        delBtn.classList.add('delete')
+        delBtn.dataset.action = 'delete';
+        delBtn.title = "Delete";
+        delBtn.innerHTML = `<i class="ri-delete-bin-line"></i>`;
+        btns.appendChild(delBtn);
+
+        headerEl.appendChild(titleEl);
+        headerEl.appendChild(btns);
+
+        const noteEl = document.createElement('div');
+        noteEl.classList.add('note-body-text');
+        noteEl.innerText = data.note;
+
+        listEl.appendChild(headerEl);
+        listEl.appendChild(noteEl);
+
+        frag.appendChild(listEl);
+    });
+    notesListEl.appendChild(frag);
+    updateCount();
+}
+
+renderNotes(notes);
+
+addBtn.addEventListener('click', () => {
+
+    let obj = {
+        title: "",
+        note: ""
+    };
+
+    if (input.value.trim() !== "") {
+        obj.title = input.value.trim();
+    }
+
+    if (textarea.value.trim() === "") return alert('you must write some note in the textarea!');
+
+    obj.note = textarea.value.trim();
+
+    notes.push(obj);
+
+    input.value = '';
+    textarea.value = '';
+
+    renderNotes(notes);
+
+    localStorage.setItem('notes', JSON.stringify(notes))
+
+});
+
+clearBtn.addEventListener('click', () => {
+    input.value = '';
+    textarea.value = '';
+});
+
+notesListEl.addEventListener('click', (e) => {
+    if (e.target.closest('.delete')) {
+        let noteEl = e.target.closest('li');
+        let index = Number(noteEl.dataset.index);
+        notes.splice(index, 1);
+        localStorage.setItem('notes', JSON.stringify(notes));
+        renderNotes(notes)
+    } else return
+});

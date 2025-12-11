@@ -11,16 +11,9 @@
   <main class="app" id="app" aria-labelledby="app-title">
     <header class="app-header">
       <h1 id="app-title">Notes</h1>
-
-      <div class="controls">
-        <label class="search-wrap" for="search">
-          <input id="search" class="search" type="search" placeholder="Search notes..." aria-label="Search notes" />
-        </label>
-      </div>
     </header>
 
     <section class="composer" aria-label="Create note">
-      <!-- JS: hook to read and write here -->
       <input id="note-title" class="note-title" type="text" placeholder="Title (optional)" aria-label="Note title" />
       <textarea id="note-body" class="note-body" rows="6" placeholder="Write your note..." aria-label="Note content"></textarea>
 
@@ -38,15 +31,7 @@
       </div>
 
       <ul id="notes-list" class="notes-list" role="list">
-        <!-- <li class="note-card" data-id="abc123">
-          <header class="note-head">
-            <h3 class="note-title-text">Title</h3>
-            <div class="note-actions">
-              <button class="icon-btn delete" data-action="delete" title="Delete"><i class="ri-delete-bin-line"></i></button>
-            </div>
-          </header>
-          <div class="note-body-text">how are you? today i am trying to create a notes application which </div>
-        </li> -->
+        
       </ul>
     </section>
 
